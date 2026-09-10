@@ -27,6 +27,11 @@ def get_db():
 def healthz():
     return {"status": "ok"}
 
+@app.get("/version")
+def version():
+    return {"version": "1.0.0"}
+
+
 
 @app.get("/tasks")
 def list_tasks(db: Session = Depends(get_db)):
