@@ -1,0 +1,11 @@
+environments:
+  dev:
+    cluster: minikube
+    replicas: 1
+    cpu_request: "250m"
+    memory_request: "256Mi"
+  prod:
+    cluster: minikube
+    replicas: 2
+    cpu_request: "500m"
+    memory_request: "512Mi"
