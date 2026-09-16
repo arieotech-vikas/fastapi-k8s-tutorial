@@ -10,6 +10,7 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+
 CACHE_KEY = "tasks:all"
 CACHE_TTL_SECONDS = 30
 
@@ -54,3 +55,10 @@ def create_task(title: str, db: Session = Depends(get_db)):
     db.refresh(task)
     redis_client.delete(CACHE_KEY)
     return task
+
+from pathlib import Path
+from fastapi.staticfiles import StaticFiles
+
+FRONTEND_DIST = Path(__file__).parent / "frontend" / "dist"
+app.mount("/", StaticFiles(directory=FRONTEND_DIST, html=True), name="static")
+
